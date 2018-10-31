@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show.html</title>
+    <script src="../static/js/jquery-1.12.4.min.js"></script>
+    <script src="../static/js/pca.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            general_select_p();
+            general_select_c(0);
+            general_select_a(0);
+
+            $('#sel_p').change(function () {
+                var p_id=$(this).val();
+                general_select_c(p_id);
+                var c_id=$('#sel_c').val();
+                general_select_a(c_id);
+
+            });
+            $('#sel_c').change(function () {
+                var c_id=$(this).val();
+                general_select_a(c_id);
+            });
+        });
+
+        function general_select_p() {
+            var select=$('#sel_p');
+            var len=arr_p.length;
+            for(var i=0;i<len;i++){
+                var option='<option value="'+arr_p[i]['id']+'">'+arr_p[i]['text']+'</option>';
+                select.append(option);
+            }
+        };
+         function general_select_c(p_id) {
+            var select=$('#sel_c');
+            select.empty();
+            var len=arr_c.length;
+            for(var i=0;i<len;i++){
+                if(arr_c[i]['p_id']==p_id){
+                    var option='<option value="'+arr_c[i]['id']+'">'+arr_c[i]['text']+'</option>';
+                    select.append(option);
+                }
+            }
+        };
+         function general_select_a(c_id) {
+            var select=$('#sel_a');
+            select.empty();
+            var len=arr_a.length;
+            for(var i=0;i<len;i++){
+                if(arr_a[i]['c_id']==c_id){
+                    var option='<option value="'+arr_a[i]['id']+'">'+arr_a[i]['text']+'</option>';
+                    select.append(option);
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+   <h1>三级联动</h1>
+   <div>
+       省<select name="sel_p" id="sel_p"></select>
+       市<select name="sel_p" id="sel_c"></select>
+       区<select name="sel_p" id="sel_a"></select>
+   </div>
+</body>
+</html>
